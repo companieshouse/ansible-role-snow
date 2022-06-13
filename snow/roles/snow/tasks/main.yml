@@ -8,6 +8,7 @@
   package:
      name: /tmp/COMPANIESHOUSE-snowagent-6.4.1-x64.rpm
      state: present
+     disable_gpg_check: yes
 
 - name: Copy snow config and set h owner and permissions
   ansible.builtin.copy:
