@@ -1,23 +1,10 @@
-- name: Create temporary directory
-  tempfile:
-    state: directory
-  register: temp_dir
+---
+- name: Copy rpm file to server.
+  copy:
+     src: files/COMPANIESHOUSE-snowagent-6.4.1-x64.rpm
+     dest: /tmp/COMPANIESHOUSE-snowagent-6.4.1-x64.rpm
 
-- name: Download Snow rpm {{ resource_bucket_snow_prefix }}/snow-{{ snow_version }}-x86_64.rpm
-  vars:
-    ansible_python_interpreter: "{{ python_interpreter }}"
-  aws_s3:
-    bucket: "{{ resource_bucket_name }}"
-    object: "{{ resource_bucket_snow_prefix }}/snow-{{ snow_version }}-x86_64.rpm"
-    dest: "{{ temp_dir.path }}/snow-{{ snow_version }}-x86_64.rpm"
-    mode: get
-
-- name: Install rpm {{ temp_dir.path }}/snow-{{ snow_version }}-x86_64.rpm
-  yum:
-    name: "{{ temp_dir.path }}/snow-{{ snow_version }}-x86_64.rpm"
-    state: present
-
-- name: Remove temporary directory
-  file:
-    path: temp_dir.path
-    state: absent
+- name: Install package.
+  package:
+     name: /tmp/COMPANIESHOUSE-snowagent-6.4.1-x64.rpm
+     state: present
