@@ -8,3 +8,12 @@
   package:
      name: /tmp/COMPANIESHOUSE-snowagent-6.4.1-x64.rpm
      state: present
+
+- name: Copy snow config and set h owner and permissions
+  ansible.builtin.copy:
+    src: files/snowagent.config
+    dest: /opt/snow/snowagent.config
+    owner: root
+    group: root
+    mode: '0600'
+    backup: yes
