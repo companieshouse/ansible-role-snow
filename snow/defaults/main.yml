@@ -1,2 +1,4 @@
 ---
-# defaults file for role-name
+aws_s3_release_bucket: "shared-services.eu-west-2.resources.ch.gov.uk"
+aws_s3_release_bucket_access_key: ""
+aws_s3_release_bucket_secret_key: ""
