@@ -1,5 +1,4 @@
 ---
-
 - name: Copy files
   amazon.aws.aws_s3:
     bucket: "{{ aws_s3_release_bucket }}"
@@ -13,7 +12,7 @@
     - COMPANIESHOUSE-snowagent-6.4.1-x64.rpm
     - snowagent.config
     
-- name: Install package.
+- name: Install package
   package:
      name: /tmp/COMPANIESHOUSE-snowagent-6.4.1-x64.rpm
      state: present
