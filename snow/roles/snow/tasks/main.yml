@@ -1,9 +1,18 @@
 ---
-- name: Copy rpm file to server.
-  copy:
-     src: files/COMPANIESHOUSE-snowagent-6.4.1-x64.rpm
-     dest: /tmp/COMPANIESHOUSE-snowagent-6.4.1-x64.rpm
 
+- name: Copy files
+  amazon.aws.aws_s3:
+    bucket: "{{ aws_s3_release_bucket }}"
+    object: "snow/{{ item }}"
+    dest: "/tmp/{{ item }}"
+    mode: get
+    overwrite: different
+    aws_access_key: "{{ aws_s3_release_bucket_access_key | default(omit) }}"
+    aws_secret_key: "{{ aws_s3_release_bucket_secret_key | default(omit) }}"
+  with_items:
+    - COMPANIESHOUSE-snowagent-6.4.1-x64.rpm
+    - snowagent.config
+    
 - name: Install package.
   package:
      name: /tmp/COMPANIESHOUSE-snowagent-6.4.1-x64.rpm
@@ -12,7 +21,7 @@
 
 - name: Copy snow config and set h owner and permissions
   ansible.builtin.copy:
-    src: files/snowagent.config
+    src: /tmp/snowagent.config
     dest: /opt/snow/snowagent.config
     owner: root
     group: root
