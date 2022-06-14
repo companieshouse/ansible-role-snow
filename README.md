@@ -1,19 +1,11 @@
 
-# ansible-role-repository-template
-
-## Dependencies
-
+# ansible-role-snow
 Installs the snow agent.
 
-### Example Requirements File
-
-How you use the role within a given project
-
-```
-- src: https://github.com/companieshouse/<role-name>
-  name: <role-name>
-  version: "<branch/tag>"
-```  
+## Requirements
+- boto 
+- boto3
+- botocore
 
 ## License
 
